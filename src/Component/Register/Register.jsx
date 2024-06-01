@@ -2,10 +2,13 @@ import { Link } from "react-router-dom";
 import useAuth from "../../Hooks/useAuth";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
-
+import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 const Register = () => {
   const { createUser } = useAuth();
   const [showPassword, setShowPassword] = useState(false);
+  const [startDate, setStartDate] = useState(new Date());
   const {
     register,
     handleSubmit,
@@ -13,6 +16,10 @@ const Register = () => {
     formState: { errors },
   } = useForm();
   const onSubmit = (data) => console.log(data);
+  // createUser(data.email, data.password).then((result) => {
+  //   const loginUser = result.useForm;
+  //   console.log(loginUser);
+  // });
   const togglePassVisibility = () => {
     setShowPassword(!showPassword);
   };
@@ -85,7 +92,15 @@ const Register = () => {
                     className="absolute inset-y-0 right-0 px-3 flex items-center "
                     onClick={togglePassVisibility}
                   >
-                    {showPassword ? <p>hide</p> : <p>show</p>}
+                    {showPassword ? (
+                      <p>
+                        <FaRegEye></FaRegEye>
+                      </p>
+                    ) : (
+                      <p>
+                        <FaRegEyeSlash />
+                      </p>
+                    )}
                   </button>
                 </div>
                 {errors.password && (
@@ -103,14 +118,16 @@ const Register = () => {
                 <label className="label">
                   <span className="label-text">Date Of birth</span>
                 </label>
-                <input
-                  type="text"
-                  placeholder="Dob"
-                  className="input input-bordered"
+                <DatePicker
+                  className="input input-bordered input-md w-full max-w-xs  focus:outline-sky-600"
+                  selected={startDate}
+                  onChange={(date) => setStartDate(date)}
+                  name="deadline"
                   {...register("dateOfBirth", {
                     required: "Date of Birth is required",
                   })}
                 />
+
                 {errors.dateOfBirth && (
                   <span className="text-red-600">
                     {errors.dateOfBirth.message}
