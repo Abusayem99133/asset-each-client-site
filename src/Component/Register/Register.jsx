@@ -1,15 +1,21 @@
 import { Link } from "react-router-dom";
 import useAuth from "../../Hooks/useAuth";
 import { useForm } from "react-hook-form";
+import { useState } from "react";
 
 const Register = () => {
   const { createUser } = useAuth();
+  const [showPassword, setShowPassword] = useState(false);
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm();
   const onSubmit = (data) => console.log(data);
+  const togglePassVisibility = () => {
+    setShowPassword(!showPassword);
+  };
   return (
     <div>
       <div className="hero min-h-screen bg-base-200">
@@ -32,8 +38,15 @@ const Register = () => {
                   type="text"
                   placeholder="Your Name"
                   className="input input-bordered"
-                  {...register("full name")}
+                  {...register("fullName", {
+                    required: "fullName is required",
+                  })}
                 />
+                {errors.fullName && (
+                  <span className="text-red-600">
+                    {errors.fullName.message}
+                  </span>
+                )}
               </div>
               <div className="form-control">
                 <label className="label">
@@ -43,19 +56,43 @@ const Register = () => {
                   type="email"
                   placeholder="email"
                   className="input input-bordered"
-                  required
+                  {...register("email", { required: "Email is required" })}
                 />
+                {errors.email && (
+                  <span className="text-red-600">{errors.email.message}</span>
+                )}
               </div>
               <div className="form-control">
                 <label className="label">
                   <span className="label-text">Password</span>
                 </label>
-                <input
-                  type="password"
-                  placeholder="password"
-                  className="input input-bordered"
-                  required
-                />
+                <div className="relative">
+                  <input
+                    type={showPassword ? "text" : "password"}
+                    placeholder="password"
+                    className="input input-bordered w-full"
+                    {...register("password", {
+                      required: "password is required",
+                      pattern: {
+                        value: /^(?=.*[a-z])(?=.*[A-Z]).{6,}$/,
+                        message:
+                          "Password must be at least 6 characters long and include at least one uppercase letter and one lowercase letter",
+                      },
+                    })}
+                  />
+                  <button
+                    type="button"
+                    className="absolute inset-y-0 right-0 px-3 flex items-center "
+                    onClick={togglePassVisibility}
+                  >
+                    {showPassword ? <p>hide</p> : <p>show</p>}
+                  </button>
+                </div>
+                {errors.password && (
+                  <span className="text-red-600">
+                    {errors.password.message}
+                  </span>
+                )}
                 <label className="label">
                   <a href="#" className="label-text-alt link link-hover">
                     Forgot password?
@@ -70,8 +107,15 @@ const Register = () => {
                   type="text"
                   placeholder="Dob"
                   className="input input-bordered"
-                  required
+                  {...register("dateOfBirth", {
+                    required: "Date of Birth is required",
+                  })}
                 />
+                {errors.dateOfBirth && (
+                  <span className="text-red-600">
+                    {errors.dateOfBirth.message}
+                  </span>
+                )}
               </div>
               <div className="form-control mt-6">
                 <input
