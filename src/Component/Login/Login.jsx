@@ -1,28 +1,44 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import useAuth from "../../Hooks/useAuth";
 import { Helmet } from "react-helmet-async";
+import Swal from "sweetalert2";
+import SocialLogin from "../SocialLogin";
 
 const Login = () => {
   const { signIn } = useAuth();
+  const navigate = useNavigate();
+  const location = useLocation();
+  const from = location.state?.from?.pathname || "/";
+  console.log("use to the location ", location.state);
+
   const handleLogin = (event) => {
     event.preventDefault();
     const form = event.target;
     const email = form.email.value;
     const password = form.password.value;
     console.log(email, password);
-    signIn(email, password).then((result) => {
-      const user = result.user;
-      console.log(user);
-    });
+    signIn(email, password)
+      .then((result) => {
+        const user = result.user;
+        console.log(user);
+        Swal.fire({
+          title: "Login Success.",
+          text: "You clicked the button!",
+          icon: "success",
+        });
+        navigate(from, { replace: true });
+      })
+      .catch((error) => console.log(error.message));
   };
+
   return (
-    <div>
+    <>
       <Helmet>
-        <title>Asset-Each || Login-Page</title>
+        <title>Bistro-Boss | SignIn</title>
       </Helmet>
       <div className="hero min-h-screen bg-base-200">
-        <div className="hero-content flex-col lg:flex-row">
-          <div className="text-center lg:text-left">
+        <div className="hero-content flex-col md:flex-row ">
+          <div className="text-center lg:text-left w-1/2">
             <h1 className="text-5xl font-bold">Login now!</h1>
             <p className="py-6">
               Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda
@@ -30,8 +46,8 @@ const Login = () => {
               et a id nisi.
             </p>
           </div>
-          <div className="card shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
-            <form className="card-body">
+          <div className="card shrink-0 w-1/2 max-w-sm shadow-2xl bg-base-100">
+            <form onSubmit={handleLogin} className="card-body">
               <div className="form-control">
                 <label className="label">
                   <span className="label-text">Email</span>
@@ -39,6 +55,7 @@ const Login = () => {
                 <input
                   type="email"
                   placeholder="email"
+                  name="email"
                   className="input input-bordered"
                   required
                 />
@@ -48,8 +65,9 @@ const Login = () => {
                   <span className="label-text">Password</span>
                 </label>
                 <input
-                  type="password"
+                  type="text"
                   placeholder="password"
+                  name="password"
                   className="input input-bordered"
                   required
                 />
@@ -61,19 +79,31 @@ const Login = () => {
               </div>
 
               <div className="form-control mt-6">
-                <button className="btn btn-primary">Login</button>
+                <input
+                  className="btn btn-primary"
+                  type="submit"
+                  value="Login"
+                />
               </div>
-              <p>
-                Please Register Now{" "}
-                <Link to="/register" className="font-bold">
-                  Register
-                </Link>
-              </p>
             </form>
+            <p className="p-4">
+              <small>
+                New Here?{" "}
+                <Link to="/signUp" className="btn-link">
+                  Create an account
+                </Link>
+              </small>
+            </p>
+
+            <span className="text-center p-2">or SignIn</span>
+
+            <div className="text-center text-3xl p-2">
+              <SocialLogin></SocialLogin>
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 
