@@ -1,8 +1,25 @@
 import { Link } from "react-router-dom";
+import useAuth from "../../Hooks/useAuth";
+import { Helmet } from "react-helmet-async";
 
 const Login = () => {
+  const { signIn } = useAuth();
+  const handleLogin = (event) => {
+    event.preventDefault();
+    const form = event.target;
+    const email = form.email.value;
+    const password = form.password.value;
+    console.log(email, password);
+    signIn(email, password).then((result) => {
+      const user = result.user;
+      console.log(user);
+    });
+  };
   return (
     <div>
+      <Helmet>
+        <title>Asset-Each || Login-Page</title>
+      </Helmet>
       <div className="hero min-h-screen bg-base-200">
         <div className="hero-content flex-col lg:flex-row">
           <div className="text-center lg:text-left">

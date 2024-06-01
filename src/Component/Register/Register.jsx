@@ -1,12 +1,13 @@
 import { Link } from "react-router-dom";
-import useAuth from "../../Hooks/useAuth";
 import { useForm } from "react-hook-form";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import SocialLogin from "../SocialLogin";
+import { Helmet } from "react-helmet-async";
+import useAuth from "../../Hooks/useAuth";
 const Register = () => {
-  const { createUser } = useAuth();
   const [showPassword, setShowPassword] = useState(false);
   const [startDate, setStartDate] = useState(new Date());
   const {
@@ -15,16 +16,22 @@ const Register = () => {
     reset,
     formState: { errors },
   } = useForm();
-  const onSubmit = (data) => console.log(data);
-  // createUser(data.email, data.password).then((result) => {
-  //   const loginUser = result.useForm;
-  //   console.log(loginUser);
-  // });
+  const { createUser } = useAuth();
+  const onSubmit = (data) => {
+    console.log(data, "hlw");
+    createUser(data.email, data.password, data.fullName).then((result) => {
+      const loginUser = result.user;
+      console.log(loginUser);
+    });
+  };
   const togglePassVisibility = () => {
     setShowPassword(!showPassword);
   };
   return (
     <div>
+      <Helmet>
+        <title>Asset-Each || Register-Page</title>
+      </Helmet>
       <div className="hero min-h-screen bg-base-200">
         <div className="hero-content flex-col lg:flex-row">
           <div className="text-center lg:text-left">
@@ -122,16 +129,15 @@ const Register = () => {
                   className="input input-bordered input-md w-full max-w-xs  focus:outline-sky-600"
                   selected={startDate}
                   onChange={(date) => setStartDate(date)}
-                  name="deadline"
-                  {...register("dateOfBirth", {
-                    required: "Date of Birth is required",
-                  })}
+                  name="date"
+                  // {...register("date", {
+                  //   required: "Date of Birth is required",
+                  // })}
+                  required
                 />
 
-                {errors.dateOfBirth && (
-                  <span className="text-red-600">
-                    {errors.dateOfBirth.message}
-                  </span>
+                {errors.date && (
+                  <span className="text-red-600">{errors.date.message}</span>
                 )}
               </div>
               <div className="form-control mt-6">
@@ -147,6 +153,10 @@ const Register = () => {
                   Login
                 </Link>
               </p>
+              <hr />
+              <div>
+                <SocialLogin></SocialLogin>
+              </div>
             </form>
           </div>
         </div>
