@@ -19,10 +19,20 @@ const Register = () => {
   const { createUser } = useAuth();
   const onSubmit = (data) => {
     console.log(data, "hlw");
-    createUser(data.email, data.password, data.fullName).then((result) => {
-      const loginUser = result.user;
-      console.log(loginUser);
-    });
+    createUser(data.email, data.password, data.fullName, data.photo).then(
+      (result) => {
+        // if (data.password.length < 6) {
+        //   toast.error("Password should be at least 6 character.!");
+        //   return;
+        // } else if (!/(?=.*[a-z])(?=.*[A-Z]).{6,}/.test(data.password)) {
+        //   toast.error("please show the on character in Uppercase and Lowercase");
+        // } else {
+        //   toast.success("Successfully Register");
+        // }
+        const loginUser = result.user;
+        console.log(loginUser);
+      }
+    );
   };
   const togglePassVisibility = () => {
     setShowPassword(!showPassword);
@@ -138,6 +148,20 @@ const Register = () => {
 
                 {errors.date && (
                   <span className="text-red-600">{errors.date.message}</span>
+                )}
+              </div>
+              <div className="form-control">
+                <label className="label">
+                  <span className="label-text">Photo</span>
+                </label>
+                <input
+                  type="email"
+                  placeholder="email"
+                  className="input input-bordered"
+                  {...register("email", { required: "Email is required" })}
+                />
+                {errors.email && (
+                  <span className="text-red-600">{errors.email.message}</span>
                 )}
               </div>
               <div className="form-control mt-6">

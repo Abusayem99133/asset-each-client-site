@@ -89,7 +89,7 @@ const Login = () => {
             <p className="p-4">
               <small>
                 New Here?{" "}
-                <Link to="/signUp" className="btn-link">
+                <Link to="/register" className="btn-link">
                   Create an account
                 </Link>
               </small>

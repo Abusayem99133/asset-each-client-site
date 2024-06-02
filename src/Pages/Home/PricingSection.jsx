@@ -2,11 +2,9 @@ const PricingSection = () => {
   return (
     <div>
       <div>
-        <h1>Let's get started</h1>
-        <p>
-          We believe security should be accessible to every company, no matter
-          the size.
-        </p>
+        <h1 className="text-center font-bold text-4xl my-2">
+          Let's get started Register
+        </h1>
       </div>
       <div className="grid md:grid-cols-3 gap-5 ">
         {" "}
