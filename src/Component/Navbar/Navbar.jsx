@@ -1,8 +1,24 @@
 import { Link, NavLink } from "react-router-dom";
 import useAuth from "../../Hooks/useAuth";
-
+import { useEffect, useState } from "react";
+import profile from "../../assets/image/mt-1944-team-img02.png";
 const Navbar = () => {
   const { user, logOut } = useAuth();
+  const [theme, setTheme] = useState("light");
+  const handleToggle = (e) => {
+    if (e.target.checked) {
+      setTheme("dark");
+    } else {
+      setTheme("light");
+    }
+  };
+
+  useEffect(() => {
+    localStorage.setItem("theme", theme);
+    const localTheme = localStorage.getItem("theme");
+
+    document.querySelector("html").setAttribute("data-theme", localTheme);
+  }, [theme]);
   const handleLogOut = () => {
     logOut()
       .then(() => {})
@@ -115,15 +131,49 @@ const Navbar = () => {
           </ul>
         </div>
         <div className="navbar-end">
-          {user ? (
-            <>
-              <button onClick={handleLogOut} className="btn ">
-                LogOut
-              </button>
-            </>
+          <div className="form-control w-52 ">
+            <label className="cursor-pointer label">
+              <span className="label-text"></span>
+              <input
+                type="checkbox"
+                className="toggle toggle-secondary "
+                onChange={handleToggle}
+              />
+            </label>
+          </div>
+          {user?.email ? (
+            <div className="dropdown dropdown-end">
+              <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
+                <div className="w-10">
+                  <img
+                    className="rounded-full"
+                    alt="user photo"
+                    src={user?.photoURL || profile}
+                  />
+                </div>
+              </label>
+              <ul
+                tabIndex={0}
+                className="menu menu-sm dropdown-content mt-3 z-[10] p-2 shadow bg-base-100 rounded-box w-52"
+              >
+                <li>
+                  <button className="btn btn-sm btn-ghost">
+                    {user?.displayName || "User Name not found"}
+                  </button>
+                </li>
+                <li>
+                  <button
+                    onClick={() => logOut()}
+                    className="btn btn-sm btn-ghost"
+                  >
+                    Logout
+                  </button>
+                </li>
+              </ul>
+            </div>
           ) : (
             <>
-              <Link to="/login" className="btn">
+              <Link to="/login" className="btn hover:bg-sky-500">
                 Login
               </Link>
             </>
