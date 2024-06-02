@@ -11,12 +11,16 @@ import {
 } from "react-icons/fa";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import SocialLogin from "../SocialLogin";
 import { Helmet } from "react-helmet-async";
 import useAuth from "../../Hooks/useAuth";
 import toast, { Toaster } from "react-hot-toast";
 const Register = () => {
-  const { createUser, updateUserProfile, googleLoginWithUser } = useAuth();
+  const {
+    createUser,
+    updateUserProfile,
+    googleLoginWithUser,
+    gitHubLoginUser,
+  } = useAuth();
   const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
@@ -153,7 +157,9 @@ const Register = () => {
                 </button>
               </div>
               <div>
-                <FaGithub></FaGithub>
+                <button onClick={() => handleSocialLogin(gitHubLoginUser)}>
+                  <FaGithub></FaGithub>
+                </button>
               </div>
             </div>
           </form>

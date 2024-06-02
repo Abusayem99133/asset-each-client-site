@@ -2,7 +2,6 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import useAuth from "../../Hooks/useAuth";
 import { Helmet } from "react-helmet-async";
 import Swal from "sweetalert2";
-import SocialLogin from "../SocialLogin";
 
 const Login = () => {
   const { signIn } = useAuth();
@@ -97,9 +96,7 @@ const Login = () => {
 
             <span className="text-center p-2">or SignIn</span>
 
-            <div className="text-center text-3xl p-2">
-              <SocialLogin></SocialLogin>
-            </div>
+            <div className="text-center text-3xl p-2"></div>
           </div>
         </div>
       </div>
