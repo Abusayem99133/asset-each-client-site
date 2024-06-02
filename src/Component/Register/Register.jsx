@@ -1,7 +1,14 @@
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { useContext, useState } from "react";
-import { FaEye, FaEyeSlash, FaRegEye, FaRegEyeSlash } from "react-icons/fa";
+import {
+  FaEye,
+  FaEyeSlash,
+  FaGithub,
+  FaGoogle,
+  FaRegEye,
+  FaRegEyeSlash,
+} from "react-icons/fa";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import SocialLogin from "../SocialLogin";
@@ -9,7 +16,7 @@ import { Helmet } from "react-helmet-async";
 import useAuth from "../../Hooks/useAuth";
 import toast, { Toaster } from "react-hot-toast";
 const Register = () => {
-  const { createUser, updateUserProfile } = useAuth();
+  const { createUser, updateUserProfile, googleLoginWithUser } = useAuth();
   const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
@@ -20,8 +27,9 @@ const Register = () => {
     const name = form.get("name");
     const photo = form.get("photo");
     const email = form.get("email");
+    const date = form.get("date");
     const password = form.get("password");
-    console.log(name, photo, email, password);
+    console.log("koi gelo photo", name, photo, email, password, date);
     if (password.length < 6) {
       toast.error("Password should be at least 6 character.!");
       return;
@@ -39,7 +47,13 @@ const Register = () => {
       })
       .catch();
   };
-
+  const handleSocialLogin = (socialProvider) => {
+    socialProvider().then((result) => {
+      if (result.user) {
+        navigate(from);
+      }
+    });
+  };
   return (
     <div>
       <Helmet>
@@ -92,6 +106,19 @@ const Register = () => {
             </div>
             <div className="form-control">
               <label className="label">
+                <span className="label-text">Date of Birth</span>
+              </label>
+
+              <input
+                type="text"
+                placeholder="date of birth"
+                name="date"
+                className="input input-bordered"
+                required
+              />
+            </div>
+            <div className="form-control">
+              <label className="label">
                 <span className="label-text text-white">Password</span>
               </label>
               <input
@@ -119,6 +146,16 @@ const Register = () => {
             </h2>
             <hr />
             <h2 className="text-white text-center ">Or SignIn</h2>
+            <div className="flex justify-center text-3xl mt-2 gap-4">
+              <div>
+                <button onClick={() => handleSocialLogin(googleLoginWithUser)}>
+                  <FaGoogle></FaGoogle>
+                </button>
+              </div>
+              <div>
+                <FaGithub></FaGithub>
+              </div>
+            </div>
           </form>
         </div>
       </div>
