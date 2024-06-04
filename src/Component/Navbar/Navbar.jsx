@@ -24,10 +24,28 @@ const Navbar = () => {
       .then(() => {})
       .catch((error) => console.log(error));
   };
-
+  const navItemForUser = (
+    <>
+      <li>
+        <NavLink to="/">Home</NavLink>
+      </li>
+      <li>
+        <NavLink to="/myAssets">My Assets</NavLink>
+      </li>
+      <li>
+        <NavLink to="/team">My Team</NavLink>
+      </li>
+      <li>
+        <NavLink to="/requestAsset">Request Asset</NavLink>
+      </li>
+      <li>
+        <NavLink to="/profile">Profile</NavLink>
+      </li>
+    </>
+  );
   return (
     <div>
-      <div className="navbar bg-blue-400 bg-opacity-60 fixed z-10 max-w-7xl mx-auto">
+      <div className="navbar bg-blue-800 bg-opacity-60  z-10 max-w-7xl mx-auto">
         <div className="navbar-start">
           <div className="dropdown">
             <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -50,84 +68,128 @@ const Navbar = () => {
               tabIndex={0}
               className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-blue-700 rounded-box w-52"
             >
-              <li>
-                <NavLink
-                  to="/"
-                  className={({ isActive }) =>
-                    isActive
-                      ? "border-2 border-sky-500 font-bold text-white"
-                      : "font-bold text-white"
-                  }
-                >
-                  Home
-                </NavLink>
-              </li>
-              <li>
-                <NavLink
-                  to="/employee"
-                  className={({ isActive }) =>
-                    isActive
-                      ? "border-2 border-sky-500 font-bold text-white"
-                      : "font-bold text-white"
-                  }
-                >
-                  Join as an Employee
-                </NavLink>
-              </li>
-              <li>
-                <NavLink
-                  to="/manager"
-                  className={({ isActive }) =>
-                    isActive
-                      ? "border-2 border-sky-500 font-bold text-white"
-                      : "font-bold text-white"
-                  }
-                >
-                  Join as an HR Manager
-                </NavLink>
-              </li>
+              {user?.email ? (
+                <>
+                  <li>
+                    <NavLink to="/">Home</NavLink>
+                  </li>
+                  <li>
+                    <NavLink to="/myAssets">My Assets</NavLink>
+                  </li>
+                  <li>
+                    <NavLink to="/team">My Team</NavLink>
+                  </li>
+                  <li>
+                    <NavLink to="/requestAsset">Request Asset</NavLink>
+                  </li>
+                  <li>
+                    <NavLink to="/profile">Profile</NavLink>
+                  </li>
+                </>
+              ) : (
+                <>
+                  <li>
+                    <NavLink
+                      to="/"
+                      className={({ isActive }) =>
+                        isActive
+                          ? "border-2 border-sky-500 font-bold text-white"
+                          : "font-bold text-white"
+                      }
+                    >
+                      Home
+                    </NavLink>
+                  </li>
+                  <li>
+                    <NavLink
+                      to="/employee"
+                      className={({ isActive }) =>
+                        isActive
+                          ? "border-2 border-sky-500 font-bold text-white"
+                          : "font-bold text-white"
+                      }
+                    >
+                      Join as an Employee
+                    </NavLink>
+                  </li>
+                  <li>
+                    <NavLink
+                      to="/manager"
+                      className={({ isActive }) =>
+                        isActive
+                          ? "border-2 border-sky-500 font-bold text-white"
+                          : "font-bold text-white"
+                      }
+                    >
+                      Join as an HR Manager
+                    </NavLink>
+                  </li>
+                </>
+              )}
             </ul>
           </div>
           <a className="btn btn-ghost text-xl">Asset Each</a>
         </div>
         <div className="navbar-center hidden lg:flex">
           <ul className="menu menu-horizontal px-1">
-            <li>
-              <NavLink
-                to="/"
-                className={({ isActive }) =>
-                  isActive
-                    ? "border-2 border-sky-500 font-bold text-white"
-                    : "font-bold text-white"
-                }
-              >
-                Home
-              </NavLink>
-            </li>
-            <li>
-              <NavLink
-                to="/employee"
-                className={({ isActive }) =>
-                  isActive
-                    ? "border-2 border-sky-500 font-bold text-white"
-                    : "font-bold text-white"
-                }
-              >
-                Join as an Employee
-              </NavLink>
-            </li>
-            <li>
-              <NavLink
-                to="/manager"
-                className={({ isActive }) =>
-                  isActive
-                    ? "border-2 border-sky-500 font-bold text-white"
-                    : "font-bold text-white"
-                }
-              >
-                Join as an HR Manager
-              </NavLink>
-            </li>
+            {user?.email ? (
+              <>
+                <li>
+                  <NavLink to="/">Home</NavLink>
+                </li>
+                <li>
+                  <NavLink to="/myAssets">My Assets</NavLink>
+                </li>
+                <li>
+                  <NavLink to="/team">My Team</NavLink>
+                </li>
+                <li>
+                  <NavLink to="/requestAsset">Request Asset</NavLink>
+                </li>
+                <li>
+                  <NavLink to="/profile">Profile</NavLink>
+                </li>
+              </>
+            ) : (
+              <>
+                <li>
+                  <NavLink
+                    to="/"
+                    className={({ isActive }) =>
+                      isActive
+                        ? "border-2 border-sky-500 font-bold text-white"
+                        : "font-bold text-white"
+                    }
+                  >
+                    Home
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink
+                    to="/employee"
+                    className={({ isActive }) =>
+                      isActive
+                        ? "border-2 border-sky-500 font-bold text-white"
+                        : "font-bold text-white"
+                    }
+                  >
+                    Join as an Employee
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink
+                    to="/manager"
+                    className={({ isActive }) =>
+                      isActive
+                        ? "border-2 border-sky-500 font-bold text-white"
+                        : "font-bold text-white"
+                    }
+                  >
+                    Join as an HR Manager
+                  </NavLink>
+                </li>
+              </>
+            )}
           </ul>
         </div>
         <div className="navbar-end">
