@@ -2,6 +2,7 @@ import { Link, NavLink } from "react-router-dom";
 import useAuth from "../../Hooks/useAuth";
 import { useEffect, useState } from "react";
 import profile from "../../assets/image/mt-1944-team-img02.png";
+import logo from "../../assets/image/software-asset-management-services.jpg";
 const Navbar = () => {
   const { user, logOut } = useAuth();
   const [theme, setTheme] = useState("light");
@@ -133,7 +134,13 @@ const Navbar = () => {
               {user?.email ? (
                 <img className="rounded-full" src={user?.photoURL} alt="" />
               ) : (
-                <></>
+                <>
+                  <img
+                    className="btn-circle avatar rounded-full"
+                    src={logo}
+                    alt=""
+                  />
+                </>
               )}
             </div>
             Asset Each
