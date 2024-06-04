@@ -128,7 +128,16 @@ const Navbar = () => {
               )}
             </ul>
           </div>
-          <a className="btn btn-ghost text-xl">Asset Each</a>
+          <a className="btn btn-ghost text-xl">
+            <div className="btn-circle avatar">
+              {user?.email ? (
+                <img className="rounded-full" src={user?.photoURL} alt="" />
+              ) : (
+                <></>
+              )}
+            </div>
+            Asset Each
+          </a>
         </div>
         <div className="navbar-center hidden lg:flex">
           <ul className="menu menu-horizontal px-1">

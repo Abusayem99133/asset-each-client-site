@@ -33,14 +33,14 @@ const Register = () => {
     const email = form.get("email");
     const date = form.get("date");
     const password = form.get("password");
-    console.log("koi gelo photo", name, photo, email, password, date);
+    console.log(name, photo, email, password, date);
     if (password.length < 6) {
       toast.error("Password should be at least 6 character.!");
       return;
     } else if (!/(?=.*[a-z])(?=.*[A-Z]).{6,}/.test(password)) {
       toast.error("please show the on character in Uppercase and Lowercase");
     } else {
-      toast.success("Successfully Register");
+      toast.success("User Created Successfully");
     }
     createUser(email, password)
       .then((result) => {
