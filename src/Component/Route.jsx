@@ -6,6 +6,7 @@ import Login from "./Login/Login";
 import JoinasEmployee from "../Pages/JoinasEmployee";
 import JoinAsHR from "../Pages/JoinAsHR";
 import UpdateProfile from "../Pages/UpdateProfile";
+import RequestedAssets from "../Pages/RequestedAsseets";
 
 export const router = createBrowserRouter([
   {
@@ -36,6 +37,10 @@ export const router = createBrowserRouter([
       {
         path: "/updateProfile",
         element: <UpdateProfile></UpdateProfile>,
+      },
+      {
+        path: "/requestAsset",
+        element: <RequestedAssets></RequestedAssets>,
       },
     ],
   },

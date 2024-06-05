@@ -1,104 +1,90 @@
 import { Helmet } from "react-helmet-async";
-import { FaEye, FaEyeSlash, FaGithub, FaGoogle } from "react-icons/fa";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import useAuth from "../Hooks/useAuth";
-import useAxiosEmployee from "../Hooks/useAxiosEmployee";
 import { useState } from "react";
-import toast, { Toaster } from "react-hot-toast";
+import { useForm } from "react-hook-form";
+import useAxiosEmployee from "../Hooks/useAxiosEmployee";
+import Swal from "sweetalert2";
+import SocialLogin from "../Component/SocialLogin";
 
 const JoinasEmployee = () => {
   const axiosEmployee = useAxiosEmployee();
-  const {
-    createUser,
-    updateUserProfile,
-    googleLoginWithUser,
-    gitHubLoginUser,
-  } = useAuth();
-  const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
-  const location = useLocation();
-  const from = location?.state || "/";
-  const handleRegister = (event) => {
-    event.preventDefault();
-    const form = new FormData(event.currentTarget);
-    const fullName = form.get("fullName");
-    const photo = form.get("photo");
-    const email = form.get("email");
-    const date = form.get("date");
-    const password = form.get("password");
-    console.log(fullName, photo, email, password, date);
-    if (password.length < 6) {
-      toast.error("Password should be at least 6 character.!");
-      return;
-    } else if (!/(?=.*[a-z])(?=.*[A-Z]).{6,}/.test(password)) {
-      toast.error("please show the on character in Uppercase and Lowercase");
-    } else {
-      toast.success("User Created Successfully");
-    }
-    createUser(email, password)
-      .then((result) => {
-        const userInfo = {
-          email: result?.user?.email,
-          name: result?.user?.displayName,
-          role: "employee",
-        };
-        axiosEmployee.post("/users", userInfo).then((res) => {
-          console.log(res.data);
-          navigate("/");
+  const [showPassword, setShowPassword] = useState(false);
+  const { createUser, updateUserProfile } = useAuth();
+
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm();
+
+  const onSubmit = async (data) => {
+    try {
+      console.log(data);
+      const result = await createUser(data.email, data.password);
+      const loggedUser = result.user; // Corrected from `result.useForm`
+      console.log(loggedUser);
+      await updateUserProfile(data.fullName, data.photo);
+
+      // Create user entry in the database
+      const userInfo = {
+        fullName: data.fullName, // Fixed field name
+        email: data.email,
+        role: "employee", // Added role
+      };
+      const res = await axiosEmployee.post("/users", userInfo);
+      if (res.data.insertedId) {
+        reset();
+        Swal.fire({
+          title: "Good job!",
+          text: "SignUp Success",
+          icon: "success",
         });
-        console.log("users", users.role);
-        updateUserProfile(fullName, photo).then(() => {});
-        navigate(from);
-        const user = result.user;
-        console.log(user);
-      })
-      .catch();
-  };
-  const handleSocialLogin = (socialProvider) => {
-    socialProvider().then((result) => {
-      if (result.user) {
-        navigate(from);
+        navigate("/");
       }
-    });
+    } catch (error) {
+      console.error(error.message);
+    }
   };
+
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
+
   return (
-    <div>
-      <div>
-        <Helmet>
-          <title>Asset-Each | EmployeeR-page</title>
-        </Helmet>
-        <div className="md:flex w-full p-5 bg-blue-600 items-center">
-          <div className="md:w-1/2">
-            <img src={""} alt="" />
+    <>
+      <Helmet>
+        <title>Asset-Each | EmployeeSignUp</title>
+      </Helmet>
+      <div className="hero min-h-screen bg-base-200">
+        <div className="hero-content flex-col lg:flex-row-reverse">
+          <div className="text-center lg:text-left w-1/2">
+            <h1 className="text-5xl font-bold">Sign Up!</h1>
+            <p className="py-6">
+              Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda
+              excepturi exercitationem quasi. In deleniti eaque aut repudiandae
+              et a id nisi.
+            </p>
           </div>
-          <div className="md:w-1/2">
-            <form onSubmit={handleRegister} className="card-body">
-              <h1 className="text-4xl text-white text-center shadow-sm">
-                Register Now
-              </h1>
+          <div className="card shrink-0 w-1/2 max-w-sm shadow-2xl bg-base-100">
+            <form onSubmit={handleSubmit(onSubmit)} className="card-body">
               <div className="form-control">
                 <label className="label">
-                  <span className="label-text">Full Name</span>
+                  <span className="label-text">Name</span>
                 </label>
                 <input
                   type="text"
-                  placeholder="Full Name"
-                  name="fullName"
+                  placeholder="Your name"
                   className="input input-bordered"
-                  required
+                  {...register("fullName", { required: "Name is required" })}
                 />
-              </div>
-              <div className="form-control">
-                <label className="label">
-                  <span className="label-text">Email</span>
-                </label>
-                <input
-                  type="email"
-                  placeholder="email"
-                  name="email"
-                  className="input input-bordered"
-                  required
-                />
+                {errors.fullName && (
+                  <span className="text-red-600">
+                    {errors.fullName.message}
+                  </span>
+                )}
               </div>
               <div className="form-control">
                 <label className="label">
@@ -106,74 +92,92 @@ const JoinasEmployee = () => {
                 </label>
                 <input
                   type="text"
-                  placeholder="Photo"
-                  name="photo"
+                  placeholder="Photo Url"
                   className="input input-bordered"
-                  required
+                  {...register("photo", { required: "Photo URL is required" })}
                 />
+                {errors.photo && (
+                  <span className="text-red-600">{errors.photo.message}</span>
+                )}
               </div>
-              <div className="form-control">
-                <label className="label">
-                  <span className="label-text">Date of Birth</span>
-                </label>
 
-                <input
-                  type="text"
-                  placeholder="date of birth"
-                  name="date"
-                  className="input input-bordered"
-                  required
-                />
-              </div>
               <div className="form-control">
                 <label className="label">
-                  <span className="label-text text-white">Password</span>
+                  <span className="label-text">Email</span>
                 </label>
                 <input
-                  type={showPassword ? "text" : "password"}
-                  name="password"
-                  placeholder="password"
+                  type="email"
+                  placeholder="Email"
                   className="input input-bordered"
-                  required
+                  {...register("email", {
+                    required: "Email is required",
+                    pattern: {
+                      value: /^\S+@\S+$/i,
+                      message: "Entered value does not match email format",
+                    },
+                  })}
                 />
-                <span
-                  onClick={() => setShowPassword(!showPassword)}
-                  className="ml-60 md:ml-96 -mt-8"
-                >
-                  {showPassword ? <FaEyeSlash /> : <FaEye />}
-                </span>
+                {errors.email && (
+                  <span className="text-red-600">{errors.email.message}</span>
+                )}
               </div>
-              <div className="form-control mt-6">
-                <button className="btn btn-primary">Register</button>
-              </div>
-              <h2>
-                Ready For Login Now..!{" "}
-                <Link className="text-white text-center font-bold" to="/login">
-                  Login
-                </Link>
-              </h2>
-              <hr />
-              <h2 className="text-white text-center ">Or SignIn</h2>
-              <div className="flex justify-center text-3xl mt-2 gap-4">
-                <div>
+
+              <div className="form-control">
+                <label className="label">
+                  <span className="label-text">Password</span>
+                </label>
+                <div className="relative">
+                  <input
+                    type={showPassword ? "text" : "password"}
+                    placeholder="Password"
+                    className="input input-bordered w-full"
+                    {...register("password", {
+                      required: "Password is required",
+                      pattern: {
+                        value: /^(?=.*[a-z])(?=.*[A-Z]).{6,}$/,
+                        message:
+                          "Password must be at least 6 characters long and include at least one uppercase letter and one lowercase letter",
+                      },
+                    })}
+                  />
                   <button
-                    onClick={() => handleSocialLogin(googleLoginWithUser)}
+                    type="button"
+                    className="absolute inset-y-0 right-0 px-3 flex items-center"
+                    onClick={togglePasswordVisibility}
                   >
-                    <FaGoogle></FaGoogle>
+                    {showPassword ? <p>hide</p> : <p>show</p>}
                   </button>
                 </div>
-                <div>
-                  <button onClick={() => handleSocialLogin(gitHubLoginUser)}>
-                    <FaGithub></FaGithub>
-                  </button>
-                </div>
+                {errors.password && (
+                  <span className="text-red-600">
+                    {errors.password.message}
+                  </span>
+                )}
+              </div>
+
+              <div className="form-control mt-6">
+                <input
+                  className="btn btn-primary"
+                  type="submit"
+                  value="Sign Up"
+                />
               </div>
             </form>
+            <p className="p-4">
+              <small>
+                Already registered?{" "}
+                <Link to="/login" className="btn-link">
+                  Go to login
+                </Link>
+              </small>
+            </p>
+            <div className="text-center text-3xl p-2">
+              <SocialLogin></SocialLogin>
+            </div>
           </div>
         </div>
-        <Toaster />
       </div>
-    </div>
+    </>
   );
 };
 
