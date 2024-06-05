@@ -21,13 +21,13 @@ const JoinAsHR = () => {
   const handleRegister = (event) => {
     event.preventDefault();
     const form = new FormData(event.currentTarget);
-    const name = form.get("name");
+    const fullName = form.get("fullName");
     const companyName = form.get("companyName");
     const photo = form.get("photo");
     const email = form.get("email");
     const date = form.get("date");
     const password = form.get("password");
-    console.log(name, photo, email, password, date, companyName);
+    console.log(fullName, photo, email, password, date, companyName);
     if (password.length < 6) {
       toast.error("Password should be at least 6 character.!");
       return;
@@ -79,12 +79,12 @@ const JoinAsHR = () => {
                 </h1>
                 <div className="form-control">
                   <label className="label">
-                    <span className="label-text">Name</span>
+                    <span className="label-text">Full Name</span>
                   </label>
                   <input
                     type="text"
                     placeholder="Name"
-                    name="name"
+                    name="fullName"
                     className="input input-bordered"
                     required
                   />

@@ -157,7 +157,7 @@ const Navbar = () => {
                   <NavLink to="/requestAsset">Request Asset</NavLink>
                 </li>
                 <li>
-                  <NavLink to="/profile">Profile</NavLink>
+                  <NavLink to="/updateProfile">Profile</NavLink>
                 </li>
               </>
             ) : (

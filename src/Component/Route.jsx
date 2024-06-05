@@ -5,6 +5,7 @@ import Login from "./Login/Login";
 // import Register from "./Register/Register";
 import JoinasEmployee from "../Pages/JoinasEmployee";
 import JoinAsHR from "../Pages/JoinAsHR";
+import UpdateProfile from "../Pages/UpdateProfile";
 
 export const router = createBrowserRouter([
   {
@@ -31,6 +32,10 @@ export const router = createBrowserRouter([
       {
         path: "/manager",
         element: <JoinAsHR></JoinAsHR>,
+      },
+      {
+        path: "/updateProfile",
+        element: <UpdateProfile></UpdateProfile>,
       },
     ],
   },

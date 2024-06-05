@@ -21,12 +21,12 @@ const JoinasEmployee = () => {
   const handleRegister = (event) => {
     event.preventDefault();
     const form = new FormData(event.currentTarget);
-    const name = form.get("name");
+    const fullName = form.get("fullName");
     const photo = form.get("photo");
     const email = form.get("email");
     const date = form.get("date");
     const password = form.get("password");
-    console.log(name, photo, email, password, date);
+    console.log(fullName, photo, email, password, date);
     if (password.length < 6) {
       toast.error("Password should be at least 6 character.!");
       return;
@@ -47,7 +47,7 @@ const JoinasEmployee = () => {
           navigate("/");
         });
         console.log("users", users.role);
-        updateUserProfile(name, photo).then(() => {});
+        updateUserProfile(fullName, photo).then(() => {});
         navigate(from);
         const user = result.user;
         console.log(user);
@@ -78,12 +78,12 @@ const JoinasEmployee = () => {
               </h1>
               <div className="form-control">
                 <label className="label">
-                  <span className="label-text">Name</span>
+                  <span className="label-text">Full Name</span>
                 </label>
                 <input
                   type="text"
-                  placeholder="Name"
-                  name="name"
+                  placeholder="Full Name"
+                  name="fullName"
                   className="input input-bordered"
                   required
                 />
