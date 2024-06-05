@@ -1,3 +1,4 @@
+import EmployeeAndHRuser from "../../Component/EmployeeAndHRuser";
 import useAuth from "../../Hooks/useAuth";
 import About from "./About";
 import Banner from "./Banner";
@@ -6,11 +7,13 @@ import PricingSection from "./PricingSection";
 
 const Home = () => {
   const { user } = useAuth();
+  // console.log("user ashce", user.role);
   return (
     <div>
       {user?.email ? (
         <MyPendingReq />
       ) : (
+        // <EmployeeAndHRuser></EmployeeAndHRuser>
         <>
           <div>
             <Banner></Banner>

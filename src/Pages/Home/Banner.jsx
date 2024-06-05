@@ -32,7 +32,7 @@ const Banner = () => {
         <SwiperSlide>
           <div className="hero min-h-screen">
             <img className="w-full h-full" src={img1} alt="" />
-            <Link to="/employee">
+            <Link to="/joinEmployee">
               <button className=" border-b-4 rounded-xl border-2 py-2 px-2  mt-32 text-white bg-opacity-70 bg-black hover:bg-orange-400">
                 Join as an Employee
               </button>

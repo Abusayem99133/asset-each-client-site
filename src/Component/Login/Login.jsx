@@ -2,9 +2,12 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import useAuth from "../../Hooks/useAuth";
 import { Helmet } from "react-helmet-async";
 import Swal from "sweetalert2";
+import { FaGithub, FaGoogle } from "react-icons/fa";
+import useAxiosEmployee from "../../Hooks/useAxiosEmployee";
 
 const Login = () => {
-  const { signIn } = useAuth();
+  const { signIn, googleLoginWithUser, gitHubLoginUser } = useAuth();
+  const axiosEmployee = useAxiosEmployee();
   const navigate = useNavigate();
   const location = useLocation();
   const from = location.state?.from?.pathname || "/";
@@ -29,11 +32,26 @@ const Login = () => {
       })
       .catch((error) => console.log(error.message));
   };
+  const handleSocialLogin = (socialProvider) => {
+    socialProvider().then((result) => {
+      if (result.user) {
+        navigate(from);
+      }
+      const userInfo = {
+        email: result?.user?.email,
+        name: result?.user?.displayName,
+      };
+      axiosEmployee.post("/users", userInfo).then((res) => {
+        console.log(res.data);
+        navigate("/");
+      });
+    });
+  };
 
   return (
     <>
       <Helmet>
-        <title>Bistro-Boss | SignIn</title>
+        <title>Asset-Each | SignIn</title>
       </Helmet>
       <div className="hero min-h-screen bg-base-200">
         <div className="hero-content flex-col md:flex-row ">
@@ -88,7 +106,7 @@ const Login = () => {
             <p className="p-4">
               <small>
                 New Here?{" "}
-                <Link to="/register" className="btn-link">
+                <Link to="/JoinEmployee" className="btn-link">
                   Create an account
                 </Link>
               </small>
@@ -96,7 +114,18 @@ const Login = () => {
 
             <span className="text-center p-2">or SignIn</span>
 
-            <div className="text-center text-3xl p-2"></div>
+            <div className="flex justify-center text-3xl mt-2 gap-4">
+              <div>
+                <button onClick={() => handleSocialLogin(googleLoginWithUser)}>
+                  <FaGoogle></FaGoogle>
+                </button>
+              </div>
+              <div>
+                <button onClick={() => handleSocialLogin(gitHubLoginUser)}>
+                  <FaGithub></FaGithub>
+                </button>
+              </div>
+            </div>
           </div>
         </div>
       </div>

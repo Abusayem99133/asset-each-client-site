@@ -3,6 +3,8 @@ import useAuth from "../../Hooks/useAuth";
 import { useEffect, useState } from "react";
 import profile from "../../assets/image/mt-1944-team-img02.png";
 import logo from "../../assets/image/software-asset-management-services.jpg";
+import useAxiosSecure from "../../Hooks/useAxiosSecure";
+import { useQuery } from "@tanstack/react-query";
 const Navbar = () => {
   const { user, logOut } = useAuth();
   const [theme, setTheme] = useState("light");
@@ -25,6 +27,14 @@ const Navbar = () => {
       .then(() => {})
       .catch((error) => console.log(error));
   };
+  const axiosSecure = useAxiosSecure();
+  const { data: users = [] } = useQuery({
+    queryKey: ["users"],
+    queryFn: async () => {
+      const res = await axiosSecure.get("/users");
+      return res.data;
+    },
+  });
   const navItemForUser = (
     <>
       <li>
@@ -70,23 +80,7 @@ const Navbar = () => {
               className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-blue-700 rounded-box w-52"
             >
               {user?.email ? (
-                <>
-                  <li>
-                    <NavLink to="/">Home</NavLink>
-                  </li>
-                  <li>
-                    <NavLink to="/myAssets">My Assets</NavLink>
-                  </li>
-                  <li>
-                    <NavLink to="/team">My Team</NavLink>
-                  </li>
-                  <li>
-                    <NavLink to="/requestAsset">Request Asset</NavLink>
-                  </li>
-                  <li>
-                    <NavLink to="/profile">Profile</NavLink>
-                  </li>
-                </>
+                <>{navItemForUser}</>
               ) : (
                 <>
                   <li>
@@ -103,7 +97,7 @@ const Navbar = () => {
                   </li>
                   <li>
                     <NavLink
-                      to="/employee"
+                      to="/JoinEmployee"
                       className={({ isActive }) =>
                         isActive
                           ? "border-2 border-sky-500 font-bold text-white"
@@ -182,7 +176,7 @@ const Navbar = () => {
                 </li>
                 <li>
                   <NavLink
-                    to="/employee"
+                    to="/JoinEmployee"
                     className={({ isActive }) =>
                       isActive
                         ? "border-2 border-sky-500 font-bold text-white"
