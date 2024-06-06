@@ -8,7 +8,7 @@ import JoinAsHR from "../Pages/HrPages/JoinAsHR";
 import UpdateProfile from "../Pages/UpdateProfile";
 import RequestedAssets from "../Pages/EmployeePage/RequestedAsseets";
 import Payments from "../Pages/HrPages/Payments";
-import MyAsset from "../Pages/EmployeePage/MyAsset";
+import MyTeam from "../Pages/EmployeePage/MyTeam";
 
 export const router = createBrowserRouter([
   {
@@ -28,29 +28,32 @@ export const router = createBrowserRouter([
       //   path: "/register",
       //   element: <Register></Register>,
       // },
-      {
-        path: "/joinEmployee",
-        element: <JoinasEmployee></JoinasEmployee>,
-      },
+      // this is Hr route
       {
         path: "/manager",
         element: <JoinAsHR></JoinAsHR>,
       },
       {
+        path: "/hrPayment",
+        element: <Payments></Payments>,
+      },
+      // sheared route
+      {
         path: "/updateProfile",
         element: <UpdateProfile></UpdateProfile>,
+      },
+      // this is employee route
+      {
+        path: "/joinEmployee",
+        element: <JoinasEmployee></JoinasEmployee>,
       },
       {
         path: "/requestAsset",
         element: <RequestedAssets></RequestedAssets>,
       },
       {
-        path: "/hrPayment",
-        element: <Payments></Payments>,
-      },
-      {
-        path: "/myAssets",
-        element: <MyAsset></MyAsset>,
+        path: "/team",
+        element: <MyTeam></MyTeam>,
       },
     ],
   },
