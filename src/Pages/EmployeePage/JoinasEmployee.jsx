@@ -4,8 +4,8 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import { FaEye, FaEyeSlash, FaGithub, FaGoogle } from "react-icons/fa";
 import toast, { Toaster } from "react-hot-toast";
-import useAuth from "../Hooks/useAuth";
-import useAxiosEmployee from "../Hooks/useAxiosEmployee";
+import useAuth from "../../Hooks/useAuth";
+import useAxiosEmployee from "../../Hooks/useAxiosEmployee";
 
 const JoinasEmployee = () => {
   const {

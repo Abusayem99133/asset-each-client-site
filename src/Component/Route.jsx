@@ -3,12 +3,12 @@ import Main from "../Main/Main";
 import Home from "../Pages/Home/Home";
 import Login from "./Login/Login";
 // import Register from "./Register/Register";
-import JoinasEmployee from "../Pages/JoinasEmployee";
-import JoinAsHR from "../Pages/JoinAsHR";
+import JoinasEmployee from "../Pages/EmployeePage/JoinasEmployee";
+import JoinAsHR from "../Pages/HrPages/JoinAsHR";
 import UpdateProfile from "../Pages/UpdateProfile";
-import RequestedAssets from "../Pages/RequestedAsseets";
-import Payments from "../Pages/Payments";
-import MyAsset from "../Pages/MyAsset";
+import RequestedAssets from "../Pages/EmployeePage/RequestedAsseets";
+import Payments from "../Pages/HrPages/Payments";
+import MyAsset from "../Pages/EmployeePage/MyAsset";
 
 export const router = createBrowserRouter([
   {
