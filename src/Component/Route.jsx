@@ -7,6 +7,8 @@ import JoinasEmployee from "../Pages/JoinasEmployee";
 import JoinAsHR from "../Pages/JoinAsHR";
 import UpdateProfile from "../Pages/UpdateProfile";
 import RequestedAssets from "../Pages/RequestedAsseets";
+import Payments from "../Pages/Payments";
+import MyAsset from "../Pages/MyAsset";
 
 export const router = createBrowserRouter([
   {
@@ -41,6 +43,14 @@ export const router = createBrowserRouter([
       {
         path: "/requestAsset",
         element: <RequestedAssets></RequestedAssets>,
+      },
+      {
+        path: "/hrPayment",
+        element: <Payments></Payments>,
+      },
+      {
+        path: "/myAssets",
+        element: <MyAsset></MyAsset>,
       },
     ],
   },

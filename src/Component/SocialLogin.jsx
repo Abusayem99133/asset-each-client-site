@@ -1,24 +1,34 @@
-import { FaGithub, FaGoogle } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
 import useAuth from "../Hooks/useAuth";
+import useAxiosEmployee from "../Hooks/useAxiosEmployee";
+import { FaGoogle } from "react-icons/fa";
 
 const SocialLogin = () => {
-  const { googleLoginWithUser } = useAuth();
-  const handleSocialLogin = (socialProvider) => {
-    socialProvider().then((result) => {
-      if (result.user) {
-        Navigate(from);
-      }
+  const { googleLoginWithUser, gitHubLoginUser } = useAuth();
+  const axiosEmployee = useAxiosEmployee();
+  const navigate = useNavigate();
+  const handleGoogleLogin = () => {
+    googleLoginWithUser().then((result) => {
+      console.log(result.user);
+      const userInfo = {
+        email: result.user?.email,
+        name: result.user?.displayName,
+        role: "hr" || "employee",
+      };
+      axiosEmployee.post("/users", userInfo).then((res) => {
+        console.log(res.data);
+        navigate("/");
+      });
     });
   };
   return (
-    <div className="flex justify-center text-3xl mt-2 gap-4">
+    <div>
+      <div className="divider"></div>
       <div>
-        <button onClick={() => handleSocialLogin(googleLoginWithUser)}>
-          <FaGoogle></FaGoogle>
+        <button onClick={handleGoogleLogin} className="btn ">
+          <FaGoogle className="mr-2" />
+          Google
         </button>
-      </div>
-      <div>
-        <FaGithub></FaGithub>
       </div>
     </div>
   );
