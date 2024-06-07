@@ -5,6 +5,7 @@ import profile from "../../assets/image/mt-1944-team-img02.png";
 import logo from "../../assets/image/software-asset-management-services.jpg";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
+import NavbarForHr from "../../Pages/HrDashboard/NavbarForHr";
 const Navbar = () => {
   const { user, logOut } = useAuth();
   const [theme, setTheme] = useState("light");
@@ -35,6 +36,34 @@ const Navbar = () => {
       return res.data;
     },
   });
+  const navItemForHr = (
+    <>
+      <li>
+        <NavLink to="/">Home</NavLink>
+      </li>
+      <li>
+        <NavLink to="/assetList">Asset List</NavLink>
+      </li>
+      <li>
+        <NavLink to="/addAsset">Add Asset</NavLink>
+      </li>
+      <li>
+        <NavLink to="/allRequest">All Request</NavLink>
+      </li>
+      <li>
+        <NavLink to="/customRequestList">Custom Request List</NavLink>
+      </li>
+      <li>
+        <NavLink to="/myEmployeeList">My Employee List</NavLink>
+      </li>
+      <li>
+        <NavLink to="/addEmployee">Add Employee</NavLink>
+      </li>
+      <li>
+        <NavLink to="/profile">Profile</NavLink>
+      </li>
+    </>
+  );
   const navItemForUser = (
     <>
       <li>
@@ -143,23 +172,7 @@ const Navbar = () => {
         <div className="navbar-center hidden lg:flex">
           <ul className="menu menu-horizontal px-1">
             {user?.email ? (
-              <>
-                <li>
-                  <NavLink to="/">Home</NavLink>
-                </li>
-                <li>
-                  <NavLink to="/myAssets">My Assets</NavLink>
-                </li>
-                <li>
-                  <NavLink to="/team">My Team</NavLink>
-                </li>
-                <li>
-                  <NavLink to="/requestAsset">Request Asset</NavLink>
-                </li>
-                <li>
-                  <NavLink to="/updateProfile">Profile</NavLink>
-                </li>
-              </>
+              <>{navItemForHr}</> || <>{navItemForUser}</>
             ) : (
               <>
                 <li>

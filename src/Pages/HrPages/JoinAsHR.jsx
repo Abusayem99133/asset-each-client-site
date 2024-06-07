@@ -208,22 +208,9 @@ const JoinAsHR = () => {
               )}
             </div>
             <div className="form-control mt-6">
-              {axiosEmployee ? (
-                <Link to="/hrPayment">
-                  {" "}
-                  <button className="btn btn-primary w-full" type="submit">
-                    Register
-                  </button>
-                </Link>
-              ) : (
-                <button
-                  disabled
-                  className="btn btn-primary w-full"
-                  type="submit"
-                >
-                  Register
-                </button>
-              )}
+              <button className="btn btn-primary w-full" type="submit">
+                Register
+              </button>
             </div>
             <h2 className="mt-4">
               Ready For Login Now..!{" "}

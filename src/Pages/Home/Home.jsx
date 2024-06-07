@@ -11,7 +11,8 @@ const Home = () => {
   return (
     <div>
       {user?.email ? (
-        <MyPendingReq />
+        // <MyPendingReq />
+        <></>
       ) : (
         // <EmployeeAndHRuser></EmployeeAndHRuser>
         <>
