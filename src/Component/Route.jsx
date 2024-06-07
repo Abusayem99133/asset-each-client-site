@@ -10,6 +10,7 @@ import RequestedAssets from "../Pages/EmployeePage/RequestedAsseets";
 import Payments from "../Pages/HrPages/Payments";
 import MyTeam from "../Pages/EmployeePage/MyTeam";
 import AssetListPage from "../Pages/HrPages/AssetListPage";
+import AddAsset from "../Pages/HrPages/AddAsset";
 
 export const router = createBrowserRouter([
   {
@@ -41,6 +42,10 @@ export const router = createBrowserRouter([
       {
         path: "/assetList",
         element: <AssetListPage></AssetListPage>,
+      },
+      {
+        path: "/addAsset",
+        element: <AddAsset></AddAsset>,
       },
       // sheared route
       {
