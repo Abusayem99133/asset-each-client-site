@@ -50,15 +50,15 @@ const Navbar = () => {
       <li>
         <NavLink to="/allRequest">All Request</NavLink>
       </li>
-      <li>
+      {/* <li>
         <NavLink to="/customRequestList">Custom Request List</NavLink>
-      </li>
+      </li> */}
       <li>
         <NavLink to="/myEmployeeList">My Employee List</NavLink>
       </li>
-      <li>
+      {/* <li>
         <NavLink to="/addEmployee">Add Employee</NavLink>
-      </li>
+      </li> */}
       <li>
         <NavLink to="/profile">Profile</NavLink>
       </li>
