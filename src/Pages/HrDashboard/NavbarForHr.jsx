@@ -6,7 +6,7 @@ const NavbarForHr = () => {
   const [isManager] = userManager();
   return (
     <div className="">
-      <div className="w-64 min-h-screen bg-blue-600 mx-auto fixed max-w-7xl">
+      <div className="w-64 min-h-screen bg-blue-600 ">
         <ul className="menu p-4">
           {isManager ? (
             <>

@@ -13,12 +13,13 @@ import AssetListPage from "../Pages/HrPages/AssetListPage";
 import AddAsset from "../Pages/HrPages/AddAsset";
 import AllRequest from "../Pages/HrPages/AllRequest";
 import MyEmployeeList from "../Pages/HrPages/MyEmployeeList";
+import ErrorPage from "../Pages/ErrorPage";
 
 export const router = createBrowserRouter([
   {
     path: "/",
     element: <Main></Main>,
-    errorElement: "",
+    errorElement: <ErrorPage></ErrorPage>,
     children: [
       {
         path: "/",
