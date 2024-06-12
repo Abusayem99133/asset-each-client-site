@@ -1,8 +1,11 @@
-<h1>Asset Each</h1>
+<h1>Project Name: Asset Each</h1>
 <h2>Admin Access</h2>
-Username: admin
-Password: adminpassword
+<hr/>
+<h2>Username: admin</h2>
+<h2>Password: adminpassword</h2>
+
 Live Site URL: http://www.mywebsite.com
+
 <hr/>
 Features
 User Authentication:
@@ -20,7 +23,7 @@ Dashboard:
 
 <li>Comprehensive admin dashboard for managing site content and user data.
 Real-time analytics and user activity tracking.</li>
-</hr>
+<hr/>
 Content Management System (CMS):
 
 <li>Easy-to-use interface for creating, editing, and deleting content.
