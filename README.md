@@ -1,6 +1,6 @@
 <h1>Project Name: Asset Each</h1>
 <h2>Admin Access</h2>
-<hr/>
+
 <h2>Username: admin</h2>
 <h2>Password: adminpassword</h2>
 
@@ -24,7 +24,7 @@ Dashboard:
 <li>Comprehensive admin dashboard for managing site content and user data.
 Real-time analytics and user activity tracking.</li>
 <hr/>
-Content Management System (CMS):
+Content Management System:
 
 <li>Easy-to-use interface for creating, editing, and deleting content.
 Rich text editor for formatting articles and pages.</li>

@@ -155,7 +155,11 @@ const Navbar = () => {
           <a className="btn btn-ghost text-xl">
             <div className="btn-circle avatar">
               {user?.email ? (
-                <img className="rounded-full" src={user?.photoURL} alt="" />
+                <img
+                  className="rounded-full"
+                  src={user?.photoURL || profile}
+                  alt=""
+                />
               ) : (
                 <>
                   <img
