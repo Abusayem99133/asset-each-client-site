@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const axiosEmployee = axios.create({
-  baseURL: "http://localhost:5000",
+  baseURL: "https://asset-each-server-site.vercel.app",
 });
 
 const useAxiosEmployee = () => {
