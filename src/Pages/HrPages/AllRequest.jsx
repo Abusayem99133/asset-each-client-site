@@ -1,3 +1,5 @@
+import { FaTrash, FaTrashAlt } from "react-icons/fa";
+
 const AllRequest = () => {
   return (
     <div>
@@ -30,7 +32,9 @@ const AllRequest = () => {
               <td>This system is ok</td>
               <td>Pending</td>
               <td>Approve</td>
-              <td>Reject</td>
+              <td className="btn bg-red-600">
+                <FaTrashAlt className="text-white " />
+              </td>
             </tr>
           </tbody>
         </table>

@@ -1,4 +1,11 @@
-import { FaSearch } from "react-icons/fa";
+import {
+  FaBook,
+  FaBookmark,
+  FaEdit,
+  FaSearch,
+  FaTrashAlt,
+  FaUser,
+} from "react-icons/fa";
 
 const AssetListPage = () => {
   return (
@@ -31,8 +38,13 @@ const AssetListPage = () => {
               <td>Quality Control Specialist</td>
               <td>Blue</td>
               <td>20/5/25</td>
-              <td>Update</td>
-              <td>Delete</td>
+              <td className="btn bg-blue-500 mr-6">
+                <FaEdit className="text-white text-2xl "></FaEdit>
+              </td>
+              <td className="btn  bg-red-600">
+                {" "}
+                <FaTrashAlt className="text-white" />
+              </td>
             </tr>
           </tbody>
         </table>

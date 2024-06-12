@@ -62,7 +62,7 @@ const JoinAsHR = () => {
       await axiosEmployee.post("/users", userInfo);
       await updateUserProfile(fullName, photo);
 
-      navigate(from);
+      navigate("/hrPayment", { state: { price: packagePrice } });
       console.log(result.user);
     } catch (error) {
       console.error(error.message);
