@@ -57,12 +57,13 @@ const JoinAsHR = () => {
         date: date,
         package: packagePrice,
         role: "hr",
+        status: "pending",
       };
 
       await axiosEmployee.post("/users", userInfo);
       await updateUserProfile(fullName, photo);
 
-      navigate("/hrPayment", { state: { price: packagePrice } });
+      navigate(from);
       console.log(result.user);
     } catch (error) {
       console.error(error.message);
@@ -76,6 +77,7 @@ const JoinAsHR = () => {
         email: result.user.email,
         name: result.user.displayName,
         role: "hr",
+        status: "pending",
       };
 
       await axiosEmployee.post("/users", userInfo);
@@ -218,9 +220,9 @@ const JoinAsHR = () => {
                 Login
               </Link>
             </h2>
-            <hr className="my-4" />
+            {/* <hr className="my-4" />
             <h2 className="text-white text-center">Or SignIn</h2>
-            <div className="flex justify-center text-3xl mt-2 gap-4">
+             <div className="flex justify-center text-3xl mt-2 gap-4">
               <button
                 onClick={() => handleSocialLogin(googleLoginWithUser)}
                 className="text-white"
@@ -233,7 +235,7 @@ const JoinAsHR = () => {
               >
                 <FaGithub />
               </button>
-            </div>
+            </div> */}
           </form>
         </div>
       </div>
