@@ -34,30 +34,7 @@ export const router = createBrowserRouter([
       //   element: <Register></Register>,
       // },
       // this is Hr route
-      {
-        path: "/manager",
-        element: <JoinAsHR></JoinAsHR>,
-      },
-      {
-        path: "/hrPayment",
-        element: <Payments></Payments>,
-      },
-      {
-        path: "/assetList",
-        element: <AssetListPage></AssetListPage>,
-      },
-      {
-        path: "/addAsset",
-        element: <AddAsset></AddAsset>,
-      },
-      {
-        path: "/allRequest",
-        element: <AllRequest></AllRequest>,
-      },
-      {
-        path: "/myEmployeeList",
-        element: <MyEmployeeList></MyEmployeeList>,
-      },
+
       // sheared route
       {
         path: "/updateProfile",
@@ -77,5 +54,30 @@ export const router = createBrowserRouter([
         element: <MyTeam></MyTeam>,
       },
     ],
+  },
+
+  {
+    path: "manager",
+    element: <JoinAsHR></JoinAsHR>,
+  },
+  {
+    path: "hrPayment",
+    element: <Payments></Payments>,
+  },
+  {
+    path: "assetList",
+    element: <AssetListPage></AssetListPage>,
+  },
+  {
+    path: "addAsset",
+    element: <AddAsset></AddAsset>,
+  },
+  {
+    path: "allRequest",
+    element: <AllRequest></AllRequest>,
+  },
+  {
+    path: "myEmployeeList",
+    element: <MyEmployeeList></MyEmployeeList>,
   },
 ]);

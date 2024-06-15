@@ -1,14 +1,45 @@
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import useAuth from "../../Hooks/useAuth";
 import { useEffect, useState } from "react";
 import profile from "../../assets/image/mt-1944-team-img02.png";
 import logo from "../../assets/image/software-asset-management-services.jpg";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
-import NavbarForHr from "../../Pages/HrDashboard/NavbarForHr";
+import useAxiosEmployee from "../../Hooks/useAxiosEmployee";
 const Navbar = () => {
-  const { user, logOut } = useAuth();
+  const navigate = useNavigate();
+  const {
+    user,
+    logOut,
+    setVerifiedUser,
+    verifiedUser,
+    setInitialUserSelectedStatus,
+  } = useAuth();
   const [theme, setTheme] = useState("light");
+  const [userWithRole, setUserWithRole] = useState(null);
+  const axiosEmployee = useAxiosEmployee();
+
+  useEffect(() => {
+    if (user?.email) {
+      const getUserWithEmail = async () => {
+        try {
+          const result = await axiosEmployee.get(`/users/${user?.email}`);
+          if (result?.status === 200) {
+            // console.log(result)
+            setVerifiedUser(result?.data);
+          }
+        } catch (error) {
+          console.log(error);
+        }
+      };
+      getUserWithEmail();
+    }
+  }, [user]);
+
+  useEffect(() => {
+    setUserWithRole(verifiedUser);
+  }, [verifiedUser]);
+
   const handleToggle = (e) => {
     if (e.target.checked) {
       setTheme("dark");
@@ -126,6 +157,7 @@ const Navbar = () => {
                   </li>
                   <li>
                     <NavLink
+                      onClick={() => setInitialUserSelectedStatus("employee")}
                       to="/JoinEmployee"
                       className={({ isActive }) =>
                         isActive
@@ -138,6 +170,7 @@ const Navbar = () => {
                   </li>
                   <li>
                     <NavLink
+                      onClick={() => setInitialUserSelectedStatus("hr")}
                       to="/manager"
                       className={({ isActive }) =>
                         isActive
@@ -155,11 +188,7 @@ const Navbar = () => {
           <a className="btn btn-ghost text-xl">
             <div className="btn-circle avatar">
               {user?.email ? (
-                <img
-                  className="rounded-full"
-                  src={user?.photoURL || profile}
-                  alt=""
-                />
+                <img className="rounded-full" src={user?.photoURL} alt="" />
               ) : (
                 <>
                   <img
@@ -175,9 +204,7 @@ const Navbar = () => {
         </div>
         <div className="navbar-center hidden lg:flex">
           <ul className="menu menu-horizontal px-1">
-            {user?.email ? (
-              <>{navItemForHr}</> || <>{navItemForUser}</>
-            ) : (
+            {!userWithRole ? (
               <>
                 <li>
                   <NavLink
@@ -216,6 +243,11 @@ const Navbar = () => {
                   </NavLink>
                 </li>
               </>
+            ) : (
+              <>
+                {userWithRole?.role === "employee" ? navItemForUser : null}
+                {userWithRole?.role === "hr" ? navItemForHr : null}
+              </>
             )}
           </ul>
         </div>
@@ -252,7 +284,11 @@ const Navbar = () => {
                 </li>
                 <li>
                   <button
-                    onClick={() => logOut()}
+                    onClick={() => {
+                      logOut();
+
+                      navigate("/login");
+                    }}
                     className="btn btn-sm btn-ghost"
                   >
                     Logout

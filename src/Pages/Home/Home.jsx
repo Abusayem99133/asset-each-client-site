@@ -2,6 +2,7 @@ import EmployeeAndHRuser from "../../Component/EmployeeAndHRuser";
 import useAuth from "../../Hooks/useAuth";
 import About from "./About";
 import Banner from "./Banner";
+import HrHome from "./HrHome";
 import MyPendingReq from "./MyPendingReq";
 import PricingSection from "./PricingSection";
 
@@ -12,7 +13,9 @@ const Home = () => {
     <div>
       {user?.email ? (
         // <MyPendingReq />
-        <></>
+        <>
+          <HrHome></HrHome>
+        </>
       ) : (
         // <EmployeeAndHRuser></EmployeeAndHRuser>
         <>
