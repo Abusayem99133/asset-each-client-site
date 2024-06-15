@@ -6,8 +6,11 @@ import { FaEye, FaEyeSlash, FaGithub, FaGoogle } from "react-icons/fa";
 import toast, { Toaster } from "react-hot-toast";
 import useAuth from "../../Hooks/useAuth";
 import useAxiosEmployee from "../../Hooks/useAxiosEmployee";
+import DatePicker from "react-datepicker";
 
+import "react-datepicker/dist/react-datepicker.css";
 const JoinasEmployee = () => {
+  const [startDate, setStartDate] = useState(new Date());
   const {
     register,
     handleSubmit,
@@ -87,11 +90,11 @@ const JoinasEmployee = () => {
         <div className="md:w-1/2">
           <form onSubmit={handleSubmit(onSubmit)} className="card-body">
             <h1 className="text-4xl text-white text-center shadow-sm">
-              Register Now
+              Join as Employee
             </h1>
             <div className="form-control">
               <label className="label">
-                <span className="label-text">Full Name</span>
+                <span className="label-text text-white">Full Name</span>
               </label>
               <input
                 type="text"
@@ -106,7 +109,7 @@ const JoinasEmployee = () => {
 
             <div className="form-control">
               <label className="label">
-                <span className="label-text">Email</span>
+                <span className="label-text text-white">Email</span>
               </label>
               <input
                 type="email"
@@ -120,7 +123,7 @@ const JoinasEmployee = () => {
             </div>
             <div className="form-control">
               <label className="label">
-                <span className="label-text">Photo</span>
+                <span className="label-text text-white">Photo</span>
               </label>
               <input
                 type="text"
@@ -134,14 +137,15 @@ const JoinasEmployee = () => {
             </div>
             <div className="form-control">
               <label className="label">
-                <span className="label-text">Date of Birth</span>
+                <span className="label-text text-white">Date of Birth</span>
               </label>
-              <input
-                type="text"
-                placeholder="date of birth"
+              <DatePicker
+                className="input input-bordered w-full"
+                selected={startDate}
+                onChange={(date) => setStartDate(date)}
                 {...register("date", { required: true })}
-                className="input input-bordered"
               />
+
               {errors.date && (
                 <p className="text-red-500">Date of Birth is required</p>
               )}
@@ -166,23 +170,7 @@ const JoinasEmployee = () => {
                 <p className="text-red-500">Password is required</p>
               )}
             </div>
-            <div className="form-control">
-              <label className="label">
-                <span className="label-text text-white">Select Package</span>
-              </label>
-              <select
-                className="select select-bordered w-full"
-                {...register("package", { required: true })}
-              >
-                <option value="">Select a package</option>
-                <option value="5">5 Member for $5</option>
-                <option value="10">10 Member for $8</option>
-                <option value="20">20 Member for $15</option>
-              </select>
-              {errors.package && (
-                <p className="text-red-500">Package selection is required</p>
-              )}
-            </div>
+
             <div className="form-control mt-6">
               <button className="btn btn-primary" type="submit">
                 Register
