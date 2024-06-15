@@ -1,8 +1,8 @@
 <h1>Project Name: Asset Each</h1>
 <h2>Admin Access</h2>
 
-<h2>Username: admin</h2>
-<h2>Password: adminpassword</h2>
+<h2>Username: asseteach@gmail.com</h2>
+<h2>Password: assetEach612</h2>
 
 Live Site URL: http://www.mywebsite.com
 
