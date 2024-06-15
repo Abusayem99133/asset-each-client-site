@@ -20,6 +20,9 @@ const AuthProvider = ({ children }) => {
   const [user, setUser] = useState();
   const [loading, setLoading] = useState(true);
   const axiosEmployee = useAxiosEmployee();
+
+  const [verifiedUser, setVerifiedUser] = useState(null);
+
   const createUser = (email, password) => {
     setLoading(true);
     return createUserWithEmailAndPassword(auth, email, password);
@@ -83,6 +86,8 @@ const AuthProvider = ({ children }) => {
     googleLoginWithUser,
     gitHubLoginUser,
     updateUserEmail,
+    verifiedUser,
+    setVerifiedUser,
   };
   return (
     <div>

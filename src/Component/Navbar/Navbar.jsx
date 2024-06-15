@@ -1,11 +1,12 @@
 import { Link, NavLink, useNavigate } from "react-router-dom";
-import useAuth from "../../Hooks/useAuth";
 import { useEffect, useState } from "react";
+import useAuth from "../../Hooks/useAuth";
 import profile from "../../assets/image/mt-1944-team-img02.png";
 import logo from "../../assets/image/software-asset-management-services.jpg";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
 import useAxiosEmployee from "../../Hooks/useAxiosEmployee";
+
 const Navbar = () => {
   const navigate = useNavigate();
   const {
@@ -34,7 +35,7 @@ const Navbar = () => {
       };
       getUserWithEmail();
     }
-  }, [user]);
+  }, [user, axiosEmployee, setVerifiedUser]);
 
   useEffect(() => {
     setUserWithRole(verifiedUser);
@@ -54,11 +55,13 @@ const Navbar = () => {
 
     document.querySelector("html").setAttribute("data-theme", localTheme);
   }, [theme]);
+
   const handleLogOut = () => {
     logOut()
       .then(() => {})
       .catch((error) => console.log(error));
   };
+
   const axiosSecure = useAxiosSecure();
   const { data: users = [] } = useQuery({
     queryKey: ["users"],
@@ -67,6 +70,7 @@ const Navbar = () => {
       return res.data;
     },
   });
+
   const navItemForHr = (
     <>
       <li>
@@ -81,20 +85,15 @@ const Navbar = () => {
       <li>
         <NavLink to="/allRequest">All Request</NavLink>
       </li>
-      {/* <li>
-        <NavLink to="/customRequestList">Custom Request List</NavLink>
-      </li> */}
       <li>
         <NavLink to="/myEmployeeList">My Employee List</NavLink>
       </li>
-      {/* <li>
-        <NavLink to="/addEmployee">Add Employee</NavLink>
-      </li> */}
       <li>
         <NavLink to="/profile">Profile</NavLink>
       </li>
     </>
   );
+
   const navItemForUser = (
     <>
       <li>
@@ -114,9 +113,10 @@ const Navbar = () => {
       </li>
     </>
   );
+
   return (
     <div>
-      <div className="navbar bg-blue-800 bg-opacity-60  z-10 max-w-7xl mx-auto">
+      <div className="navbar bg-blue-800 bg-opacity-60 z-10 max-w-7xl mx-auto">
         <div className="navbar-start">
           <div className="dropdown">
             <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -285,8 +285,7 @@ const Navbar = () => {
                 <li>
                   <button
                     onClick={() => {
-                      logOut();
-
+                      handleLogOut();
                       navigate("/login");
                     }}
                     className="btn btn-sm btn-ghost"

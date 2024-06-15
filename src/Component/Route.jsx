@@ -14,6 +14,7 @@ import AddAsset from "../Pages/HrPages/AddAsset";
 import AllRequest from "../Pages/HrPages/AllRequest";
 import MyEmployeeList from "../Pages/HrPages/MyEmployeeList";
 import ErrorPage from "../Pages/ErrorPage";
+import MyAsset from "../Pages/EmployeePage/MyAsset";
 
 export const router = createBrowserRouter([
   {
@@ -34,7 +35,30 @@ export const router = createBrowserRouter([
       //   element: <Register></Register>,
       // },
       // this is Hr route
-
+      {
+        path: "manager",
+        element: <JoinAsHR></JoinAsHR>,
+      },
+      {
+        path: "hrPayment",
+        element: <Payments></Payments>,
+      },
+      {
+        path: "assetList",
+        element: <AssetListPage></AssetListPage>,
+      },
+      {
+        path: "addAsset",
+        element: <AddAsset></AddAsset>,
+      },
+      {
+        path: "allRequest",
+        element: <AllRequest></AllRequest>,
+      },
+      {
+        path: "myEmployeeList",
+        element: <MyEmployeeList></MyEmployeeList>,
+      },
       // sheared route
       {
         path: "/updateProfile",
@@ -46,38 +70,21 @@ export const router = createBrowserRouter([
         element: <JoinasEmployee></JoinasEmployee>,
       },
       {
-        path: "/requestAsset",
-        element: <RequestedAssets></RequestedAssets>,
+        path: "/myAssets",
+        element: <MyAsset></MyAsset>,
       },
       {
         path: "/team",
         element: <MyTeam></MyTeam>,
       },
+      {
+        path: "/requestAsset",
+        element: <RequestedAssets></RequestedAssets>,
+      },
+      {
+        path: "/profile",
+        element: <UpdateProfile></UpdateProfile>,
+      },
     ],
-  },
-
-  {
-    path: "manager",
-    element: <JoinAsHR></JoinAsHR>,
-  },
-  {
-    path: "hrPayment",
-    element: <Payments></Payments>,
-  },
-  {
-    path: "assetList",
-    element: <AssetListPage></AssetListPage>,
-  },
-  {
-    path: "addAsset",
-    element: <AddAsset></AddAsset>,
-  },
-  {
-    path: "allRequest",
-    element: <AllRequest></AllRequest>,
-  },
-  {
-    path: "myEmployeeList",
-    element: <MyEmployeeList></MyEmployeeList>,
   },
 ]);
