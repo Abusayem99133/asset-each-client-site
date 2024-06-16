@@ -1,72 +1,69 @@
 import toast, { Toaster } from "react-hot-toast";
 import useAuth from "../Hooks/useAuth";
 import { Helmet } from "react-helmet-async";
+import UpdateProfiles from "./UpdateProfiles";
 
-const UpdateProfile = () => {
-  const { user, updateUserProfile } = useAuth();
-  const handleUpdate = (event) => {
-    event.preventDefault();
-    const form = new FormData(event.currentTarget);
-    const fullName = form.get("fullName");
-    const email = form.get("email");
-    console.log(fullName, email);
-    updateUserProfile(fullName);
-    toast
-      .success("successfully Updated")
-      .then(() => {})
-      .catch((error) => {
-        console.log(error.message);
-      });
-    //     updateUserEmail(email)
-    //       .then(() => {})
-    //       .catch((error) => {
-    //         console.log(error.message);
-    //       });
+const UpdatedProfile = () => {
+  const { updateUserProfile, user } = useAuth();
+
+  const handleUpdate = (e) => {
+    e.preventDefault();
+    console.log(e.currentTarget);
+    const form = new FormData(e.currentTarget);
+    const name = form.get("name");
+    const photo = form.get("photo");
+
+    updateUserProfile(name, photo);
+
+    toast.success("successfully Updated");
   };
   return (
     <div>
       <Helmet>
-        <title>Asset-Each | Update-Page</title>
+        <title>Update-Page</title>
       </Helmet>
-      <div>
-        <form className="card-body">
-          <div className="form-control">
-            <label className="label">
-              <span className="label-text">Full Name</span>
-            </label>
-            <input
-              type="text"
-              placeholder="fullName"
-              name="fullName"
-              className="input input-bordered"
-              defaultValue={user?.fullName}
-              required
-            />
-          </div>
-          <div className="form-control">
-            <label className="label">
-              <span className="label-text">Email</span>
-            </label>
-            <input
-              type="email"
-              placeholder="email"
-              name="email"
-              className="input input-bordered"
-              defaultValue={user?.email}
-              readOnly
-            />
-          </div>
-          <input
-            className=" btn my-4 btn-outline border-b-4 mx-auto flex border-blue-600 hover:bg-blue-500"
-            onClick={handleUpdate}
-            type="submit"
-            value="Updated"
-          />
-        </form>
+      <div className="hero flex min-h-screen justify-center items-center ">
+        <div>
+          <form onSubmit={handleUpdate} className="card-body">
+            <div className="form-control">
+              <label className="label">
+                <span className="label-text text-white">Name</span>
+              </label>
+              <input
+                type="text"
+                placeholder="Your name"
+                name="name"
+                className="input input-bordered"
+                required
+              />
+            </div>
+            <div className="form-control">
+              <label className="label">
+                <span className="label-text text-white">Email</span>
+              </label>
+              <input
+                type="email"
+                name="email"
+                placeholder="User Email"
+                className="input input-bordered"
+                defaultValue={user?.email}
+                readOnly
+              />
+            </div>
+
+            <div className="form-control mt-6">
+              <button className="btn hover:bg-orange-300 font-display">
+                Updated
+              </button>
+            </div>
+          </form>
+        </div>
+        <UpdateProfiles></UpdateProfiles>
       </div>
+
       <Toaster />
     </div>
   );
 };
 
-export default UpdateProfile;
+export default UpdatedProfile;

@@ -139,9 +139,7 @@ const Navbar = () => {
               tabIndex={0}
               className="menu menu-sm dropdown-content mt-3 z-[10] p-2 shadow bg-blue-700 rounded-box w-52"
             >
-              {user?.email ? (
-                <>{navItemForUser}</>
-              ) : (
+              {!userWithRole ? (
                 <>
                   <li>
                     <NavLink
@@ -157,7 +155,6 @@ const Navbar = () => {
                   </li>
                   <li>
                     <NavLink
-                      onClick={() => setInitialUserSelectedStatus("employee")}
                       to="/JoinEmployee"
                       className={({ isActive }) =>
                         isActive
@@ -170,7 +167,6 @@ const Navbar = () => {
                   </li>
                   <li>
                     <NavLink
-                      onClick={() => setInitialUserSelectedStatus("hr")}
                       to="/manager"
                       className={({ isActive }) =>
                         isActive
@@ -181,6 +177,11 @@ const Navbar = () => {
                       Join as an HR Manager
                     </NavLink>
                   </li>
+                </>
+              ) : (
+                <>
+                  {userWithRole?.role === "employee" ? navItemForUser : null}
+                  {userWithRole?.role === "hr" ? navItemForHr : null}
                 </>
               )}
             </ul>
