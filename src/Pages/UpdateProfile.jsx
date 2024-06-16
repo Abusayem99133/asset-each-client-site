@@ -22,7 +22,7 @@ const UpdatedProfile = () => {
       <Helmet>
         <title>Update-Page</title>
       </Helmet>
-      <div className="hero flex min-h-screen justify-center items-center ">
+      <div className="hero  flex min-h-screen justify-center items-center ">
         <div>
           <form onSubmit={handleUpdate} className="card-body">
             <div className="form-control">
