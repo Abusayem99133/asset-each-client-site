@@ -2,6 +2,7 @@ import { FaSearch } from "react-icons/fa";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import { useState, useEffect } from "react";
 import Swal from "sweetalert2";
+import { Helmet } from "react-helmet-async";
 
 const AssetListPage = () => {
   const [allAssets, setAllAssets] = useState([]);
@@ -124,6 +125,9 @@ const AssetListPage = () => {
   console.log(allAssets);
   return (
     <div>
+      <Helmet>
+        <title>Asset-Each |HR Asset List Page</title>
+      </Helmet>
       {/* TODO: filter in the available/ out of stock and asset type returnable/nonreturnable */}
       <div className=" md:flex items-center gap-5">
         <label className="input input-bordered flex items-center gap-2 w-full max-w-xs my-4">

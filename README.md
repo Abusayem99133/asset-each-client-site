@@ -4,7 +4,7 @@
 <h2>Username: asseteach@gmail.com</h2>
 <h2>Password: assetEach612</h2>
 
-Live Site URL: http://www.mywebsite.com
+Live Site URL: https://asset-each.web.app
 
 <hr/>
 Features

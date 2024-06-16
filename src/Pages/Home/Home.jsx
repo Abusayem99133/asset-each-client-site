@@ -5,6 +5,8 @@ import About from "./About";
 import Banner from "./Banner";
 import MyPendingReq from "./MyPendingReq";
 import PricingSection from "./PricingSection";
+import { Helmet } from "react-helmet-async";
+import HrHome from "./HrHome";
 
 const Home = () => {
   const { user, verifiedUser } = useAuth();
@@ -19,8 +21,17 @@ const Home = () => {
 
   return (
     <div>
+      <Helmet>
+        <title>Asset-Each | Home Page</title>
+      </Helmet>
       {user?.email ? (
-        <>{verifiedUser?.role === "employee" ? <MyPendingReq /> : null}</>
+        <>
+          {verifiedUser?.role === "employee" ? (
+            <MyPendingReq />
+          ) : verifiedUser?.role === "hr" ? (
+            <HrHome />
+          ) : null}
+        </>
       ) : (
         // <EmployeeAndHRuser></EmployeeAndHRuser>
         <>

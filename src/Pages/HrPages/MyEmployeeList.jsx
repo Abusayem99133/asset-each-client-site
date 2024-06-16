@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import useAxiosEmployee from "../../Hooks/useAxiosEmployee";
 import useAuth from "../../Hooks/useAuth";
 import Swal from "sweetalert2";
+import { Helmet } from "react-helmet-async";
 
 const MyEmployeeList = () => {
   const [myEmployees, setMyEmployees] = useState([]);
@@ -61,6 +62,9 @@ const MyEmployeeList = () => {
 
   return (
     <div>
+      <Helmet>
+        <title>Asset-Each |HR MyEmployee List Page</title>
+      </Helmet>
       <div>
         {/* TODO:  this section use to all company member details */}
         <h1 className="text-center text-4xl text-blue-500">This is My Team</h1>

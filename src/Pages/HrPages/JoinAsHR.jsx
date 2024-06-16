@@ -91,7 +91,7 @@ const JoinAsHR = () => {
   return (
     <div>
       <Helmet>
-        <title>HR-Page</title>
+        <title>Asset-Each |HR Register Page</title>
       </Helmet>
       <div className="md:flex w-full p-5 bg-blue-600 items-center">
         <div className="md:w-1/2">

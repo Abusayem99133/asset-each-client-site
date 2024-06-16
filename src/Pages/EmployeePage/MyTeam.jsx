@@ -1,6 +1,9 @@
 const MyTeam = () => {
   return (
     <div>
+      <Helmet>
+        <title>Asset-Each | myTeam</title>
+      </Helmet>
       {/* TODO:  this section use to all company member details */}
       <h1 className="text-center text-4xl text-blue-500">This is My Team</h1>
       <div className="card card-compact w-96 bg-base-100 shadow-xl">

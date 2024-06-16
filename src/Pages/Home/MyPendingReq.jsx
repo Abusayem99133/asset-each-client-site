@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Helmet } from "react-helmet-async";
 
 const MyPendingReq = () => {
   const [isAffiliated, setIsAffiliated] = useState(true);
@@ -28,6 +29,9 @@ const MyPendingReq = () => {
   }, []);
   return (
     <div>
+      <Helmet>
+        <title>Asset-Each |Employee Home Page</title>
+      </Helmet>
       <div className="container mx-auto p-4">
         {!isAffiliated ? (
           <div className="alert alert-error shadow-lg">

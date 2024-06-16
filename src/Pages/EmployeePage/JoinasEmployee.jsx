@@ -6,8 +6,11 @@ import { FaEye, FaEyeSlash, FaGithub, FaGoogle } from "react-icons/fa";
 import toast, { Toaster } from "react-hot-toast";
 import useAuth from "../../Hooks/useAuth";
 import useAxiosEmployee from "../../Hooks/useAxiosEmployee";
+import DatePicker from "react-datepicker";
 
+import "react-datepicker/dist/react-datepicker.css";
 const JoinasEmployee = () => {
+  const [startDate, setStartDate] = useState(new Date());
   const {
     register,
     handleSubmit,
@@ -79,7 +82,7 @@ const JoinasEmployee = () => {
   return (
     <div>
       <Helmet>
-        <title>HR-Page</title>
+        <title>Asset-Each | Employee Register Page</title>
       </Helmet>
       <div className="md:flex w-full p-5 bg-blue-600 items-center">
         <div className="md:w-1/2">
@@ -88,11 +91,11 @@ const JoinasEmployee = () => {
         <div className="md:w-1/2">
           <form onSubmit={handleSubmit(onSubmit)} className="card-body">
             <h1 className="text-4xl text-white text-center shadow-sm">
-              Register Now
+              Employee Register
             </h1>
             <div className="form-control">
               <label className="label">
-                <span className="label-text">Full Name</span>
+                <span className="label-text text-white">Full Name</span>
               </label>
               <input
                 type="text"
@@ -107,7 +110,7 @@ const JoinasEmployee = () => {
 
             <div className="form-control">
               <label className="label">
-                <span className="label-text">Email</span>
+                <span className="label-text text-white">Email</span>
               </label>
               <input
                 type="email"
@@ -121,7 +124,7 @@ const JoinasEmployee = () => {
             </div>
             <div className="form-control">
               <label className="label">
-                <span className="label-text">Photo</span>
+                <span className="label-text text-white">Photo</span>
               </label>
               <input
                 type="text"
@@ -135,7 +138,7 @@ const JoinasEmployee = () => {
             </div>
             <div className="form-control">
               <label className="label">
-                <span className="label-text">Date of Birth</span>
+                <span className="label-text text-white">Date of Birth</span>
               </label>
               <input
                 type="text"
@@ -167,7 +170,7 @@ const JoinasEmployee = () => {
                 <p className="text-red-500">Password is required</p>
               )}
             </div>
-            <div className="form-control">
+            {/* <div className="form-control">
               <label className="label">
                 <span className="label-text text-white">Select Package</span>
               </label>
@@ -183,7 +186,7 @@ const JoinasEmployee = () => {
               {errors.package && (
                 <p className="text-red-500">Package selection is required</p>
               )}
-            </div>
+            </div> */}
             <div className="form-control mt-6">
               <button className="btn btn-primary" type="submit">
                 Register

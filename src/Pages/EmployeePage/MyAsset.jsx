@@ -3,6 +3,7 @@ import useAxiosEmployee from "../../Hooks/useAxiosEmployee";
 import { useEffect, useState } from "react";
 import useAuth from "../../Hooks/useAuth";
 import Swal from "sweetalert2";
+import { Helmet } from "react-helmet-async";
 
 const MyAsset = () => {
   const [allRequests, setAllRequests] = useState([]);
@@ -64,6 +65,9 @@ const MyAsset = () => {
   return (
     <>
       <div>
+        <Helmet>
+          <title>Asset-Each | myAsset Page</title>
+        </Helmet>
         <label className="input input-bordered flex items-center gap-2 border-blue-500 my-4  w-1/4">
           <input type="text" className="grow" placeholder="Search" />
           <FaSearch></FaSearch>

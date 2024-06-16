@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import useAxiosEmployee from "../../Hooks/useAxiosEmployee";
 import useAuth from "../../Hooks/useAuth";
 import Swal from "sweetalert2";
+import { Helmet } from "react-helmet-async";
 
 const AllRequest = () => {
   const [allRequests, setAllRequests] = useState([]);
@@ -57,6 +58,9 @@ const AllRequest = () => {
 
   return (
     <div>
+      <Helmet>
+        <title>Asset-Each |HR All Request Page</title>
+      </Helmet>
       <div className="overflow-x-auto">
         <table className="table">
           {/* head */}
