@@ -18,7 +18,7 @@ const About = () => {
         builder, this financial website theme lets you personalize different
         pre-designed pages and launch your financial company site effortlessly.
       </p>
-      <div className="flex gap-8 w-full mt-12">
+      <div className="flex-col md:flex gap-8 w-full mt-12">
         <div>
           <img className=" w-full" src={image1} alt="" />
         </div>
@@ -37,7 +37,7 @@ const About = () => {
           <li>Further investigation of the market.</li>
         </div>
       </div>
-      <div className="flex items-center gap-4 mt-16">
+      <div className=" flex-col md:flex items-center gap-4 mt-16">
         <div className="space-y-2">
           <h1 className="text-3xl font-bold">
             Competitors analysis will provide you with strategy
